@@ -1,0 +1,216 @@
+<?php 
+session_start();
+
+include "db_conn.php";
+
+if(!isset($_SESSION['usn']))
+{
+    $_SESSION['login_note'] = "Please Login to continue";
+    header("Location: index.php");
+}
+
+$usn = $_SESSION['usn'];
+$get_name = "SELECT NAME FROM USERS WHERE USN='$usn'";
+if(($conn->query($get_name))->num_rows>0)
+{
+    $row = $conn->query($get_name)->fetch_assoc();
+    $name = ucwords(strtolower($row["NAME"]));
+}
+$_SESSION['name']=$name;
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online MCQ Exam Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</head>
+
+<style>
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    h3 {
+        color: white;
+        padding: 15px 0px 15px 50px;
+        font-weight: 700;
+        margin-bottom: 0;
+    }
+
+    #bg {
+        background-image: linear-gradient(90deg, #275e69 20%, #93dfef 80%);
+        color: white;
+        padding: 4%;
+    }
+
+    .take_test_button {
+        background-image: linear-gradient(180deg, #d9f2fc, #c2ecf8);
+        width: 20%;
+        height: 20vh;
+        margin: 10px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .take_test_container {
+        border: 1px solid #3c4a76;
+        display: flex;
+        border-radius: 10px;
+    }
+
+    .take_test_info {
+        margin: 10px;
+        color: white;
+    }
+
+    .dis_topic {
+        font-size: large;
+    }
+
+    .take_test_button:hover>span {
+        transform: scale(1.1);
+        transition-duration: 1s;
+    }
+
+    .nt_span {
+        border-radius: 5px;
+        border: 2px solid #222B46;
+        padding: 5px 10px;
+        font-size: small;
+    }
+
+    .nav_item:hover {
+        cursor: pointer;
+        transform: scale(1.08);
+        transition-duration: 1s;
+    }
+    a,a:hover
+    {
+        text-decoration:none;
+        color:white;
+    }
+    button
+    {
+        background-image: linear-gradient(180deg, #d9f2fc, #c2ecf8);
+        margin: 10px;
+        border:none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+</style>
+
+<body style="background-color:#101426;font-family: 'DM Sans',sans-serif;">
+    <div class=" container-fluid">
+        <div class="row" style="color: white;background-color: #101426;
+        position: sticky;
+        top: 0;
+        z-index: 5;">
+            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                <h3>ONLINE MCQ EXAM PORTAL</h3>
+
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                <div
+                    style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
+                    <div class="nav_item"><span>Leaderboard</span></div>
+                    <div class="nav_item"><span>Your Performance</span></div>
+                    <div class="nav_item"><span><a href="logout.php" target="_blank">Logout</a></span></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+                <div id="bg">
+                    <div>
+                        <h5>Hi <?php echo $name?>,</h5>
+                    </div>
+                    <div>
+                        <h4>Welcome to MCQ PORTAL</h4>
+                    </div>
+                </div>
+                <div style="display: flex;flex-direction: column;align-items: center;">
+                
+                    <div style="width:85%;">
+                    <form action="take_test.php" target="_blank" method="POST" style="width:100%;">
+                        <div class="mt-3">
+                            <p style="font-size: xx-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;"
+                                class="mt-4">Available
+                                Subjects</p>
+                            <div class="take_test_container">
+                                <button class="take_test_button" type="submit" name="SUB" value="1">
+                                    <span>Attempt Test Now</span>
+                                </button>
+                                <div class="take_test_info">
+                                    <p class="dis_topic">COMPUTER NETWORKS</p>
+                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <div>
+                                        <span class="nt_span">No
+                                            of
+                                            questions :
+                                            5</span>
+                                        <span class="nt_span mx-3">Time Limit : 1 minute</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="take_test_container mt-3">
+                                <button class="take_test_button" type="submit" name="SUB" value="2">
+                                    <!-- <button type="submit" style="width:100%;height:100%;"> -->
+                                    <span>Attempt Test Now</span>
+                                    <!-- </button> -->
+                                </button>
+                                <div class="take_test_info">
+                                    <p class="dis_topic">OPERATING SYSTEMS</p>
+                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <div>
+                                        <span class="nt_span">No
+                                            of
+                                            questions :
+                                            5</span>
+                                        <span class="nt_span mx-3">Time Limit : 1 minute</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="take_test_container mt-3 mb-5">
+                                <button class="take_test_button" type="submit" name="SUB" value="3">
+                                    <span>Attempt Test Now</span>
+                                </button>
+                                <div class="take_test_info">
+                                    <p class="dis_topic">Data Structures and Applications</p>
+                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <div>
+                                        <span class="nt_span">No
+                                            of
+                                            questions :
+                                            5</span>
+                                        <span class="nt_span mx-3">Time Limit : 1 minute</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </form>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</script>
+
+</html>
