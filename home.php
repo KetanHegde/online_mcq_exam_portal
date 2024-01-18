@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+//<?php echo $q_div ?
 include "db_conn.php";
 
 if(!isset($_SESSION['usn']))
@@ -17,6 +17,23 @@ if(($conn->query($get_name))->num_rows>0)
     $name = ucwords(strtolower($row["NAME"]));
 }
 $_SESSION['name']=$name;
+
+$at1 = "SELECT COUNT(*) FROM SCORE WHERE SID=1 AND USN='$usn'";
+$at1 = $conn->query($at1);
+$at1 = $at1 -> fetch_assoc();
+$at1 = $at1["COUNT(*)"];
+
+$at2 = "SELECT COUNT(*) FROM SCORE WHERE SID=2 AND USN='$usn'";
+$at2 = $conn->query($at2);
+$at2 = $at2 -> fetch_assoc();
+$at2 = $at2["COUNT(*)"];
+
+$at3 = "SELECT COUNT(*) FROM SCORE WHERE SID=3 AND USN='$usn'";
+$at3 = $conn->query($at3);
+$at3 = $at3 -> fetch_assoc();
+$at3 = $at3["COUNT(*)"];
+
+
 ?>
 
 <!DOCTYPE html>
@@ -145,7 +162,7 @@ $_SESSION['name']=$name;
                 <div style="display: flex;flex-direction: column;align-items: center;">
                 
                     <div style="width:85%;">
-                    <form action="take_test.php" target="_blank" method="POST" style="width:100%;">
+                    <form action="make_q.php" target="_blank" method="POST" style="width:100%;">
                         <div class="mt-3">
                             <p style="font-size: xx-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;"
                                 class="mt-4">Available
@@ -156,7 +173,7 @@ $_SESSION['name']=$name;
                                 </button>
                                 <div class="take_test_info">
                                     <p class="dis_topic">COMPUTER NETWORKS</p>
-                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <p>Attempts Remaining: <?php echo (3-$at1) ?> / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of
@@ -174,7 +191,7 @@ $_SESSION['name']=$name;
                                 </button>
                                 <div class="take_test_info">
                                     <p class="dis_topic">OPERATING SYSTEMS</p>
-                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <p>Attempts Remaining: <?php echo (3-$at2) ?> / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of
@@ -189,8 +206,8 @@ $_SESSION['name']=$name;
                                     <span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
-                                    <p class="dis_topic">Data Structures and Applications</p>
-                                    <p>Attempts Remaining: 3 / 3</p>
+                                    <p class="dis_topic">DATABASE MANAGEMENT SYSTEMS</p>
+                                    <p>Attempts Remaining: <?php echo (3-$at3) ?> / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of

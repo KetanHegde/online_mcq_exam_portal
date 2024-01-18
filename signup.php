@@ -232,8 +232,6 @@ session_destroy();
                     return false;
                 }
             }
-
-
         };
     });
 

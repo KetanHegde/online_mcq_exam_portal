@@ -8,27 +8,69 @@
         $_SESSION['login_note'] = "Please Login to continue";
         header("Location: index.php");
     }
-
-    // if(!isset($_SESSION['sel_sub']))
-    // {
-    //     header("Location: home.php");
-    // }
-
-    if($_SERVER["REQUEST_METHOD"] == "POST")
+    if(!isset($_SESSION['res']))
     {
-        $sid = $_POST["SUB"];
+        header("Location: home.php");
+    }
+    else
+    {
+
+        $sid = $_SESSION['sid'];
         $sname = "SELECT SNAME FROM SUBJECT WHERE SID = '$sid'";
         $row = $conn->query($sname)->fetch_assoc();
         $sname = $row["SNAME"];
+        $ret = $_SESSION['res'];
+        $_SESSION['check'] = true;
+        $_SESSION['sid']=$sid;
+    
 
-        $sq = "SELECT QID FROM QUESTIONS WHERE SID = '$sid' ORDER BY RAND () LIMIT 5";
-        $res = $conn->query($sq);
-        while($row = $res->fetch_assoc())
-        {
-            // $qid = $row["QID"];
-            // $q1q ="SELECT QNAME FROM QUESTIONS WHERE SID = '$qid'";
-        }
+$q_div = '';
+$i=0;
+$j=0;
+while($j<=29)
+    {
+    $q_div = $q_div . '<div class="queBox">
+    <div
+        style="height:25%;background-color:#1f274a;display: flex;align-items: center;border-top-right-radius: 6px;border-top-left-radius:6px;border-top:1px solid #93dfef;border-left:1px solid #93dfef;border-right:1px solid #93dfef;">
+        <div class="mx-3">'.($i+1).') '.$ret[$j++].'</div>
+    </div>
+    <div
+        style="background-color: #101426;color:white;padding:10px 0px;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;
+        border-bottom:1px solid #93dfef;border-left:1px solid #93dfef;border-right:1px solid #93dfef;">
+        <div class="optDiv mx-5">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" id="opt1'.$i.'" name="options'.$i.'" value="'.$ret[$j].'">
+                <label class="form-check-label" for="opt1'.$i.'">
+                '.$ret[$j++].'
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" name="options'.$i.'" class="form-check-input" id="opt2'.$i.'" value="'.$ret[$j].'"><label
+                    class="form-check-label" for="opt2'.$i.'">
+                    '.$ret[$j++].'
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="options'.$i.'" id="opt3'.$i.'" value="'.$ret[$j].'">
+                <label class="form-check-label" for="opt3'.$i.'">
+                '.$ret[$j++].'
+                </label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="options'.$i.'" id="opt4'.$i.'" value="'.$ret[$j].'">
+                <label class="form-check-label" for="opt4'.$i.'">
+                '.$ret[$j++].'
+                </label>
+            </div>
+        </div>
+    </div>
+</div>';
+    $j=$j+1;
+    $i+=1;
     }
+   
+};
+
 ?>
 
 <!DOCTYPE html>
@@ -104,8 +146,7 @@
                 </div>
                 <div class="mt-3">
                     <p style="font-size: 20px;text-align: center;margin-bottom: 0;font-weight: bold;">Time remaining</p>
-                    <p style="font-size: 80px;text-align: center;font-weight: 600;margin-bottom: 1vh;margin-top: 0;">
-                        01:00</p>
+                    <p style="font-size: 80px;text-align: center;font-weight: 600;margin-bottom: 1vh;margin-top: 0;" id="timer"></p>
                 </div>
                 <div style="width:99%;border-radius: 5px;padding: 5px;border: 1px solid #3c4a76;">
                     <p style="font-size: large;text-align:center;font-weight: 700;margin-bottom: 0;">Instructions to
@@ -120,7 +161,8 @@
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <form action="home.php" method="POST" id="f" target="_blank">
+                <form action="verify/check.php" method="POST" target="_blank" id="f" onsubmit="window.close()">
+                <input type="text" style="display:none;" name="time" id="timee">
                 <h2 style="font-size: xx-large;font-weight: bold;padding: 10px 3px;border-bottom:2px solid #93dfef;">
                     <?php echo $sname ?></h2>
                 <div style="height:88vh;display: flex;flex-direction: column;align-items: center;" class="overflow-auto"
@@ -134,59 +176,13 @@
 </body>
 
 <script>
-    var i = 0;
-    document.getElementById('d').style.display = "none";
-    var quest = document.getElementById('quest');
-    while (i < 5) {
-        let temp = `<div class="queBox">
-                        <div
-                            style="height:25%;background-color:#1f274a;display: flex;align-items: center;border-top-right-radius: 6px;border-top-left-radius:6px;border-top:1px solid #93dfef;border-left:1px solid #93dfef;border-right:1px solid #93dfef;">
-                            <div class="mx-3">1) The term HTTP stands for</div>
-                        </div>
-                        <div
-                            style="background-color: #101426;color:white;padding:10px 0px;border-bottom-left-radius: 6px;border-bottom-right-radius: 6px;
-                            border-bottom:1px solid #93dfef;border-left:1px solid #93dfef;border-right:1px solid #93dfef;">
-                            <div class="optDiv mx-5">
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" id="opt1${i}" name="options${i}">
-                                    <label class="form-check-label" for="opt1${i}">
-                                        Hypertext Transfer Protocol
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" name="options${i}" class="form-check-input" id="opt2${i}"><label
-                                        class="form-check-label" for="opt2${i}">
-                                        Hypertransfer Text Protocol
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="options${i}" id="opt3${i}">
-                                    <label class="form-check-label" for="opt3${i}">
-                                        Highspeed text transmission Protocol
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="radio" class="form-check-input" name="options${i}" id="opt4${i}">
-                                    <label class="form-check-label" for="opt4${i}">
-                                        Highspeed Text Transfer Protocol
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`;
-        quest.innerHTML += temp; i += 1;
-    }
-    quest.innerHTML += `<div class="mt-5 mb-4">
+document.getElementById('d').style.display = "none";
+
+var quest = document.getElementById('quest');
+quest.innerHTML = `<?php echo $q_div ?>`;
+quest.innerHTML += `<div class="mt-5 mb-4">
                         <button type="submit" class="btn btn-success mb-2">Submit</button>
                     </div>`;
-
-
-//     window.addEventListener('beforeunload', function (e) {
-//     //You can put your custom logic here
-//     e.preventDefault();
-//     document.getElementById('f').submit();
-//     //e.returnValue = '';
-// });
 function toggleFullscreen() {
     var elem = document.documentElement; // Get the root element of the document
 
@@ -204,24 +200,55 @@ function toggleFullscreen() {
         }
         document.getElementById('b').style.display = "none";
         document.getElementById('d').style.display = "initial";
+        updateTimer();
+    }
+}
+// document.addEventListener('keydown', function(e) {
+//     e.preventDefault();
+//   });
+
+document.addEventListener('fullscreenchange', handleFullscreenChange);
+document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+document.addEventListener('msfullscreenchange', handleFullscreenChange);
+
+function handleFullscreenChange() {
+    // Check if the document is currently in fullscreen mode
+    if (document.fullscreenElement || document.mozFullScreenElement ||
+        document.webkitFullscreenElement || document.msFullscreenElement) {
+        // Run your functions when entering fullscreen
+    } else {
+        document.getElementById("f").submit();
+        // Run your functions when exiting fullscreen
     }
 }
 
-// document.addEventListener('fullscreenchange', handleFullscreenChange);
-// document.addEventListener('mozfullscreenchange', handleFullscreenChange);
-// document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
-// document.addEventListener('msfullscreenchange', handleFullscreenChange);
 
-// function handleFullscreenChange() {
-//     // Check if the document is currently in fullscreen mode
-//     if (document.fullscreenElement || document.mozFullScreenElement ||
-//         document.webkitFullscreenElement || document.msFullscreenElement) {
-//         // Run your functions when entering fullscreen
-//     } else {
-//         document.getElementById("f").submit();
-//         // Run your functions when exiting fullscreen
-//     }
-// }
+
+
+
+
+
+var countdownTime = 120; // 5 minutes in seconds
+
+  function updateTimer() {
+    var minutes = Math.floor(countdownTime / 60);
+    var seconds = countdownTime % 60;
+
+    // Display the timer on the webpage
+    document.getElementById('timer').innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    document.getElementById('timee').value = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+    if (countdownTime > 0) {
+      countdownTime--; // Decrease the countdown time by 1 second
+      setTimeout(updateTimer, 1000); // Update the timer every 1000 milliseconds (1 second)
+    } else {
+      document.getElementById('f').submit();
+    }
+  }
+
+  // Start the timer when the page loads
+
 </script>
 
 </html>
