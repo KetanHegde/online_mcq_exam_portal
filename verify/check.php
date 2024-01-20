@@ -30,10 +30,10 @@
         $name = $_SESSION['name'];
         $sid = $_SESSION['sid'];
         $usn = $_SESSION['usn'];
-        $iq = "INSERT INTO SCORE VALUES ($usn,$sid,$time_taken,$count)";
+        $iq = "INSERT INTO SCORE VALUES ('$usn','$sid','$time_taken','$count')";
         $conn->query($iq);
 
         $_SESSION['check']=false;
-        header("Location: ../leader_board.php");
+        header("Location: ../results.php");
     }
 ?>

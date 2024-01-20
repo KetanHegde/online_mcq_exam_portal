@@ -1,3 +1,152 @@
+<?php 
+session_start();
+include "db_conn.php";
+
+if(!isset($_SESSION['usn']))
+{
+    $_SESSION['login_note'] = "Please Login to continue";
+    header("Location: index.php");
+}
+
+
+$sql = "WITH RankedScores AS (
+    SELECT
+        NAME,
+        SCORE.USN,
+        TIME_TAKEN,
+        SCORE,
+        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
+    FROM SCORE
+    JOIN USERS ON SCORE.USN = USERS.USN
+    WHERE SID = 1
+)
+SELECT NAME, USN, TIME_TAKEN, SCORE
+FROM RankedScores
+WHERE RowNum = 1
+ORDER BY SCORE DESC, TIME_TAKEN ASC";
+
+$dis='';
+$res = $conn->query($sql);
+if($res->num_rows<=0)
+{
+    $dis = "<tr><td colspan='5'>No data</td></tr>";
+}
+else
+{
+$i=1;
+while($row=$res->fetch_assoc())
+{
+    if(strlen($row['TIME_TAKEN'])==1)
+    {
+            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
+    }
+    $dis = $dis.'<tr>
+    <td>'.$i.'</td>
+    <td>'.$row['NAME'].'</td>
+    <td>'.$row['USN'].'</td>
+    <td>00:'.$row['TIME_TAKEN'].'</td>
+    <td>'.$row['SCORE'].'/5</td>
+</tr>';
+$i++;
+}
+}
+
+
+
+$sql = "WITH RankedScores AS (
+    SELECT
+        NAME,
+        SCORE.USN,
+        TIME_TAKEN,
+        SCORE,
+        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
+    FROM SCORE
+    JOIN USERS ON SCORE.USN = USERS.USN
+    WHERE SID = 2
+)
+SELECT NAME, USN, TIME_TAKEN, SCORE
+FROM RankedScores
+WHERE RowNum = 1
+ORDER BY SCORE DESC, TIME_TAKEN ASC";
+
+$dis1='';
+$res = $conn->query($sql);
+if($res->num_rows<=0)
+{
+    $dis1 = "<tr><td colspan='5'>No data</td></tr>";
+}
+else
+{
+$i=1;
+while($row=$res->fetch_assoc())
+{
+    if(strlen($row['TIME_TAKEN'])==1)
+    {
+            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
+    }
+    $dis1 = $dis1.'<tr>
+    <td>'.$i.'</td>
+    <td>'.$row['NAME'].'</td>
+    <td>'.$row['USN'].'</td>
+    <td>00:'.$row['TIME_TAKEN'].'</td>
+    <td>'.$row['SCORE'].'/5</td>
+</tr>';
+$i++;
+}
+}
+
+
+
+$sql = "WITH RankedScores AS (
+    SELECT
+        NAME,
+        SCORE.USN,
+        TIME_TAKEN,
+        SCORE,
+        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
+    FROM SCORE
+    JOIN USERS ON SCORE.USN = USERS.USN
+    WHERE SID = 3
+)
+SELECT NAME, USN, TIME_TAKEN, SCORE
+FROM RankedScores
+WHERE RowNum = 1
+ORDER BY SCORE DESC, TIME_TAKEN ASC";
+
+$dis2='';
+$res = $conn->query($sql);
+if($res->num_rows<=0)
+{
+    $dis2 = "<tr><td colspan='5'>No data</td></tr>";
+}
+else
+{
+$i=1;
+while($row=$res->fetch_assoc())
+{
+    if(strlen($row['TIME_TAKEN'])==1)
+    {
+            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
+    }
+    $dis2 = $dis2.'<tr>
+    <td>'.$i.'</td>
+    <td>'.$row['NAME'].'</td>
+    <td>'.$row['USN'].'</td>
+    <td>00:'.$row['TIME_TAKEN'].'</td>
+    <td>'.$row['SCORE'].'/5</td>
+</tr>';
+$i++;
+}
+}
+
+
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,13 +203,8 @@
 
         ::-webkit-scrollbar {
             display: none;
-            /* background-color: #3c4a76;
-            width: 10px; */
         }
 
-        /* .overflow-auto {
-            overflow: hidden !important;
-        } */
         .lb {
             background-image: linear-gradient(90deg, #275e69 20%, #93dfef 80%);
             padding: 0.7% 5% 0.7% 5%;
@@ -72,6 +216,12 @@
             transform: scale(1.08);
             transition-duration: 1s;
         }
+
+        a,a:hover
+    {
+        text-decoration:none;
+        color:white;
+    }
     </style>
 </head>
 
@@ -88,9 +238,9 @@
             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                 <div
                     style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
-                    <div class="nav_item"><span>Home</span></div>
-                    <div class="nav_item"><span>Your Performance</span></div>
-                    <div class="nav_item"><span>Logout</span></div>
+                    <div class="nav_item"><span><a href="home.php">Home</a></span></div>
+                    <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
+                    <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>
 
                 </div>
             </div>
@@ -117,27 +267,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="lead_tbody_1">
-                                            <!-- <tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr> -->
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
+                                            <?php echo $dis ?>
                                         </tbody>
                                     </table>
 
@@ -159,27 +289,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="lead_tbody_2">
-                                            <!-- <tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr> -->
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
+                                           <?php echo $dis1; ?>
                                         </tbody>
                                     </table>
 
@@ -201,27 +311,7 @@
                                             </tr>
                                         </thead>
                                         <tbody id="lead_tbody_3">
-                                            <!-- <tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr> -->
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Ketan S Hegde</td>
-                                                <td>1AY21IS046</td>
-                                                <td>00:40</td>
-                                                <td>5/5</td>
-                                            </tr>
+                                        <?php echo $dis2; ?>
                                         </tbody>
                                     </table>
 
@@ -234,37 +324,6 @@
         </div>
     </div>
 
-
-
-
-
 </body>
-<script>
-    for (var k = 0; k < 5; k++) {
-        document.getElementById('lead_tbody_1').innerHTML += `<tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr>`;
-        document.getElementById('lead_tbody_2').innerHTML += `<tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr>`;
-        document.getElementById('lead_tbody_3').innerHTML += `<tr>
-                                            <td>1</td>
-                                            <td>Ketan S Hegde</td>
-                                            <td>1AY21IS046</td>
-                                            <td>00:40</td>
-                                            <td>5/5</td>
-                                        </tr>`;
-
-    }
-
-</script>
 
 </html>

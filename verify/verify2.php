@@ -23,7 +23,18 @@ else
 {
     $_SESSION['note'] = "Successfully signed up. You can Log in to your account";
     $_SESSION['flag'] = 1;
+
+    $name = $_POST['inpName'];
+    $pass = $_POST['inp_pass'];
+    $sql = "INSERT INTO USERS VALUES ('$usn','$name','$pass')";
+    $conn->query($sql);
+
     header("Location: ../index.php");
 }
+}
+else 
+{
+  $_SESSION['login_note'] = "Please Log in to continue";
+  header("Location:../index.php");
 }
 ?>

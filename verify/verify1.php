@@ -31,6 +31,11 @@ else
     header("Location:../index.php");
 }
 }
+else 
+{
+  $_SESSION['login_note'] = "Please Log in to continue";
+  header("Location:../index.php");
+}
 
 
 

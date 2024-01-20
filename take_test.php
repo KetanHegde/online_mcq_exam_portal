@@ -96,14 +96,6 @@ while($j<=29)
             display: none;
         }
 
-        /* .btn {
-            background-color: #275e69;
-        }
-
-        .btn:hover {
-            background-color: #275e69;
-        } */
-
         .queBox {
             width: 98%;
             margin: 2% 0%;
@@ -184,18 +176,18 @@ quest.innerHTML += `<div class="mt-5 mb-4">
                         <button type="submit" class="btn btn-success mb-2">Submit</button>
                     </div>`;
 function toggleFullscreen() {
-    var elem = document.documentElement; // Get the root element of the document
+    var elem = document.documentElement; 
 
     if (!document.fullscreenElement && !document.mozFullScreenElement &&
         !document.webkitFullscreenElement && !document.msFullscreenElement) {
-        // If the document is not currently in fullscreen mode, request it
+        
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
-        } else if (elem.mozRequestFullScreen) { // Firefox
+        } else if (elem.mozRequestFullScreen) { 
             elem.mozRequestFullScreen();
-        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        } else if (elem.webkitRequestFullscreen) { 
             elem.webkitRequestFullscreen();
-        } else if (elem.msRequestFullscreen) { // Internet Explorer/Edge
+        } else if (elem.msRequestFullscreen) { 
             elem.msRequestFullscreen();
         }
         document.getElementById('b').style.display = "none";
@@ -203,9 +195,9 @@ function toggleFullscreen() {
         updateTimer();
     }
 }
-// document.addEventListener('keydown', function(e) {
-//     e.preventDefault();
-//   });
+document.addEventListener('keydown', function(e) {
+    e.preventDefault();
+  });
 
 document.addEventListener('fullscreenchange', handleFullscreenChange);
 document.addEventListener('mozfullscreenchange', handleFullscreenChange);
@@ -213,13 +205,12 @@ document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
 document.addEventListener('msfullscreenchange', handleFullscreenChange);
 
 function handleFullscreenChange() {
-    // Check if the document is currently in fullscreen mode
+    
     if (document.fullscreenElement || document.mozFullScreenElement ||
         document.webkitFullscreenElement || document.msFullscreenElement) {
-        // Run your functions when entering fullscreen
+        
     } else {
         document.getElementById("f").submit();
-        // Run your functions when exiting fullscreen
     }
 }
 
@@ -229,25 +220,23 @@ function handleFullscreenChange() {
 
 
 
-var countdownTime = 120; // 5 minutes in seconds
+var countdownTime = 60; 
 
   function updateTimer() {
     var minutes = Math.floor(countdownTime / 60);
     var seconds = countdownTime % 60;
 
-    // Display the timer on the webpage
     document.getElementById('timer').innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     document.getElementById('timee').value = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
     if (countdownTime > 0) {
-      countdownTime--; // Decrease the countdown time by 1 second
-      setTimeout(updateTimer, 1000); // Update the timer every 1000 milliseconds (1 second)
+      countdownTime--; 
+      setTimeout(updateTimer, 1000);
     } else {
       document.getElementById('f').submit();
     }
   }
 
-  // Start the timer when the page loads
 
 </script>
 

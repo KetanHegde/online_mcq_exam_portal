@@ -1,6 +1,6 @@
 <?php 
 session_start();
-//<?php echo $q_div ?
+
 include "db_conn.php";
 
 if(!isset($_SESSION['usn']))
@@ -32,6 +32,12 @@ $at3 = "SELECT COUNT(*) FROM SCORE WHERE SID=3 AND USN='$usn'";
 $at3 = $conn->query($at3);
 $at3 = $at3 -> fetch_assoc();
 $at3 = $at3["COUNT(*)"];
+
+$_SESSION['at1']=$at1;
+$_SESSION['at2']=$at2;
+$_SESSION['at3']=$at3;
+
+
 
 
 ?>
@@ -142,9 +148,9 @@ $at3 = $at3["COUNT(*)"];
             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                 <div
                     style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
-                    <div class="nav_item"><span>Leaderboard</span></div>
-                    <div class="nav_item"><span>Your Performance</span></div>
-                    <div class="nav_item"><span><a href="logout.php" target="_blank">Logout</a></span></div>
+                    <div class="nav_item"><span><a href="leader_board.php">Leaderboard</a></span></div>
+                    <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
+                    <div class="nav_item"><span><a href="logout.php" target="_blank" onclick="window.close();">Logout</a></span></div>
 
                 </div>
             </div>
@@ -168,7 +174,7 @@ $at3 = $at3["COUNT(*)"];
                                 class="mt-4">Available
                                 Subjects</p>
                             <div class="take_test_container">
-                                <button class="take_test_button" type="submit" name="SUB" value="1">
+                                <button class="take_test_button" type="submit" name="SUB" value="1" <?php if($at1=='3') echo "disabled style='cursor:not-allowed'"?>>
                                     <span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
@@ -184,7 +190,7 @@ $at3 = $at3["COUNT(*)"];
                                 </div>
                             </div>
                             <div class="take_test_container mt-3">
-                                <button class="take_test_button" type="submit" name="SUB" value="2">
+                                <button class="take_test_button" type="submit" name="SUB" value="2"  <?php if($at2=='3') echo "disabled style='cursor:not-allowed'"?>>
                                     <!-- <button type="submit" style="width:100%;height:100%;"> -->
                                     <span>Attempt Test Now</span>
                                     <!-- </button> -->
@@ -202,7 +208,7 @@ $at3 = $at3["COUNT(*)"];
                                 </div>
                             </div>
                             <div class="take_test_container mt-3 mb-5">
-                                <button class="take_test_button" type="submit" name="SUB" value="3">
+                                <button class="take_test_button" type="submit" name="SUB" value="3"  <?php if($at3=='3') echo "disabled style='cursor:not-allowed'"?>>
                                     <span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
