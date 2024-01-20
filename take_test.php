@@ -234,6 +234,7 @@ var countdownTime = 60;
       setTimeout(updateTimer, 1000);
     } else {
       document.getElementById('f').submit();
+      window.close();
     }
   }
 

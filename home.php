@@ -18,6 +18,9 @@ if(($conn->query($get_name))->num_rows>0)
 }
 $_SESSION['name']=$name;
 
+if(strlen(intval($usn))!=10)
+{
+
 $at1 = "SELECT COUNT(*) FROM SCORE WHERE SID=1 AND USN='$usn'";
 $at1 = $conn->query($at1);
 $at1 = $at1 -> fetch_assoc();
@@ -37,12 +40,7 @@ $_SESSION['at1']=$at1;
 $_SESSION['at2']=$at2;
 $_SESSION['at3']=$at3;
 
-
-
-
-?>
-
-<!DOCTYPE html>
+echo '<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -135,7 +133,7 @@ $_SESSION['at3']=$at3;
     }
 </style>
 
-<body style="background-color:#101426;font-family: 'DM Sans',sans-serif;">
+<body style="background-color:#101426;font-family: \'DM Sans\',sans-serif;">
     <div class=" container-fluid">
         <div class="row" style="color: white;background-color: #101426;
         position: sticky;
@@ -159,7 +157,7 @@ $_SESSION['at3']=$at3;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
                 <div id="bg">
                     <div>
-                        <h5>Hi <?php echo $name?>,</h5>
+                        <h5>Hi '.$name.',</h5>
                     </div>
                     <div>
                         <h4>Welcome to MCQ PORTAL</h4>
@@ -174,12 +172,14 @@ $_SESSION['at3']=$at3;
                                 class="mt-4">Available
                                 Subjects</p>
                             <div class="take_test_container">
-                                <button class="take_test_button" type="submit" name="SUB" value="1" <?php if($at1=='3') echo "disabled style='cursor:not-allowed'"?>>
-                                    <span>Attempt Test Now</span>
+                                <button class="take_test_button" type="submit" name="SUB" value="1"';
+                                if($at1==3){ echo 'disabled style="cursor:not-allowed"';
+                                }
+                                echo '><span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
                                     <p class="dis_topic">COMPUTER NETWORKS</p>
-                                    <p>Attempts Remaining: <?php echo (3-$at1) ?> / 3</p>
+                                    <p>Attempts Remaining: '.(3-$at1).' / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of
@@ -190,14 +190,14 @@ $_SESSION['at3']=$at3;
                                 </div>
                             </div>
                             <div class="take_test_container mt-3">
-                                <button class="take_test_button" type="submit" name="SUB" value="2"  <?php if($at2=='3') echo "disabled style='cursor:not-allowed'"?>>
-                                    <!-- <button type="submit" style="width:100%;height:100%;"> -->
-                                    <span>Attempt Test Now</span>
-                                    <!-- </button> -->
+                                <button class="take_test_button" type="submit" name="SUB" value="2"';
+                                if($at2==3){ echo 'disabled style="cursor:not-allowed"';
+                                }
+                                echo '><span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
                                     <p class="dis_topic">OPERATING SYSTEMS</p>
-                                    <p>Attempts Remaining: <?php echo (3-$at2) ?> / 3</p>
+                                    <p>Attempts Remaining: '.(3-$at2).' / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of
@@ -208,12 +208,14 @@ $_SESSION['at3']=$at3;
                                 </div>
                             </div>
                             <div class="take_test_container mt-3 mb-5">
-                                <button class="take_test_button" type="submit" name="SUB" value="3"  <?php if($at3=='3') echo "disabled style='cursor:not-allowed'"?>>
-                                    <span>Attempt Test Now</span>
+                                <button class="take_test_button" type="submit" name="SUB" value="3"';
+                                if($at3==3){ echo 'disabled style="cursor:not-allowed"';
+                                }
+                                echo '><span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
                                     <p class="dis_topic">DATABASE MANAGEMENT SYSTEMS</p>
-                                    <p>Attempts Remaining: <?php echo (3-$at3) ?> / 3</p>
+                                    <p>Attempts Remaining: '.(3-$at3).' / 3</p>
                                     <div>
                                         <span class="nt_span">No
                                             of
@@ -236,4 +238,132 @@ $_SESSION['at3']=$at3;
 
 </script>
 
-</html>
+</html>';
+
+}
+else
+{
+    echo '<!DOCTYPE html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Online MCQ Exam Portal</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+        <style>
+            #bg {
+                background-image: linear-gradient(90deg, #275e69 20%, #93dfef 80%);
+                color: white;
+                padding: 4%;
+            }
+    
+            ::-webkit-scrollbar {
+                display: none;
+            }
+    
+            h3 {
+                color: white;
+                padding: 15px 0px 15px 50px;
+                font-weight: 700;
+                margin-bottom: 0;
+            }
+    
+            .nav_item:hover {
+                cursor: pointer;
+                transform: scale(1.08);
+                transition-duration: 1s;
+            }
+    
+            .add_subject {
+                background-color: #93dfef;
+                width: 30%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 10px;
+                cursor: pointer;
+            }
+    
+            .add_subject:hover>span {
+                transform: scale(1.05);
+                transition-duration: 1s;
+            }
+    
+            a,
+            a:hover {
+                text-decoration: none;
+                color: white;
+            }
+    
+            button {
+                border: none;
+            }
+        </style>
+    </head>
+    
+    <body style="background-color:#101426;font-family: \'DM Sans\',sans-serif;">
+        <div class=" container-fluid">
+            <div class="row" style="color: white;background-color: #101426;
+                position: sticky;
+                top: 0;
+                z-index: 5;">
+                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                    <h3>ONLINE MCQ EXAM PORTAL</h3>
+    
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+                    <div
+                        style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
+                        <div class="nav_item"><span><a href="leader_board.php">Leaderboard</a></span></div>
+                        <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+                    <div id="bg">
+                        <div>
+                            <h5>Hi '.$name.',</h5>
+                        </div>
+                        <div>
+                            <h4>Welcome to MCQ PORTAL</h4>
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items: center;width:100%;flex-direction: column;" class="mt-4">
+                        <div style="width:85%;">
+                            <p
+                                style="font-size: x-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;">
+                                Add Questions</p>
+                            <form action="add_question.php" method="POST">
+                            <div
+                                style="display: flex;flex-direction: row;align-items: center;height:30vh;justify-content: space-between;border:1px solid #3c4a76;padding:10px;border-radius: 10px;">
+                                <button class="add_subject" type="submit" name="SUB" value="1"><span><b>COMPUTER
+                                            NETWORKS</b></span></button>
+                                <button class="add_subject" type="submit" name="SUB" value="2"><span><b>OPERATING
+                                            SYSTEMS</b></span></button>
+                                <button class="add_subject" type="submit" name="SUB" value="3"><span><b>DATABASE MANAGEMENT
+                                            SYSTEMS</b></span></button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    
+    </body>
+    
+    </html>';
+
+}
+
+
+?>
+

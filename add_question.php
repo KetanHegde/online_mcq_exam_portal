@@ -1,3 +1,33 @@
+<?php 
+session_start();
+
+include "db_conn.php";
+
+if(!isset($_SESSION['usn']))
+{
+    $_SESSION['login_note'] = "Please Login to continue";
+    header("Location: index.php");
+}
+$usn = $_SESSION['usn'];
+
+if(strlen(intval($usn))!=10)
+{
+    header("Location: home.php");
+}
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    $_SESSION['sid'] = $_POST['SUB'];
+}
+else
+{
+    header("Location: home.php");
+}
+
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,14 +192,13 @@
                     style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
                     <div class="nav_item"><span>Home</span></div>
                     <div class="nav_item"><span>Logout</span></div>
-
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
+            <form action="verify/insert_q.php" method="POST">
                 <div style="display:flex;align-items: center;width:100%;flex-direction: column;" class="mt-4">
-
                     <div style="width:60%;">
                         <p
                             style="font-size: x-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;">
@@ -201,16 +230,18 @@
                                     placeholder="Enter option 4">
                                 <div class="uli_"></div>
                             </div>
+                            <div class="mb-3" style="width:90%;">
+                                <input type="text" name="inpAns" class="form-control s" id="inpANS"
+                                    placeholder="Enter correct answer">
+                                <div class="uli_"></div>
+                            </div>
                             <div class="mt-3 mb-3">
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
-
-
                         </div>
-
                     </div>
-
                 </div>
+    </form>
             </div>
 
         </div>

@@ -24,9 +24,19 @@ else
         {
             $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
         }
+        if($row['TIME_TAKEN']=='60')
+    {
+        $tm = '01';
+        $ts = '00';
+    }
+    else
+    {
+        $tm = '00';
+        $ts = $row['TIME_TAKEN'];
+    }
         $dis = $dis.'<tr>
         <td>'.$row['SNAME'].'</td>
-        <td>00:'.$row['TIME_TAKEN'].'</td>
+        <td>'.$tm.':'.$ts.'</td>
         <td>'.$row['SCORE'].'/5</td>
     </tr>';
     }
@@ -58,6 +68,7 @@ $res = $conn->query($sql);
     while($row=$res->fetch_assoc())
     {
         $p1=($row['SUM(SCORE)']/($at1*5))*100;
+        $p1 = intval($p1);
     }
 }
 
@@ -72,6 +83,7 @@ $res = $conn->query($sql);
     while($row=$res->fetch_assoc())
     {
         $p2=($row['SUM(SCORE)']/($at2*5))*100;
+        $p2 = intval($p2);
     }
 }
 
@@ -86,6 +98,7 @@ else
     while($row=$res->fetch_assoc())
     {
         $p3=($row['SUM(SCORE)']/($at3*5))*100;
+        $p3 = intval($p3);
     }
 }
 
@@ -117,7 +130,7 @@ else
             border: 1px solid #3c4a76;
             display: flex;
             border-radius: 10px;
-            height: 50vh;
+            max-height: 50vh;
         }
 
         .lb {

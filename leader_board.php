@@ -8,7 +8,7 @@ if(!isset($_SESSION['usn']))
     header("Location: index.php");
 }
 
-
+$usn = $_SESSION['usn'];
 $sql = "WITH RankedScores AS (
     SELECT
         NAME,
@@ -40,11 +40,21 @@ while($row=$res->fetch_assoc())
     {
             $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
     }
+    if($row['TIME_TAKEN']=='60')
+    {
+        $tm = '01';
+        $ts = '00';
+    }
+    else
+    {
+        $tm = '00';
+        $ts = $row['TIME_TAKEN'];
+    }
     $dis = $dis.'<tr>
     <td>'.$i.'</td>
     <td>'.$row['NAME'].'</td>
     <td>'.$row['USN'].'</td>
-    <td>00:'.$row['TIME_TAKEN'].'</td>
+    <td>'.$tm.':'.$ts.'</td>
     <td>'.$row['SCORE'].'/5</td>
 </tr>';
 $i++;
@@ -171,7 +181,7 @@ $i++;
             border: 1px solid #3c4a76;
             display: flex;
             border-radius: 10px;
-            height: 50vh;
+            max-height: 50vh;
         }
 
         .table th {
@@ -238,9 +248,20 @@ $i++;
             <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
                 <div
                     style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
-                    <div class="nav_item"><span><a href="home.php">Home</a></span></div>
-                    <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
-                    <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>
+                    <?php
+                    if(strlen(intval($usn))!=10)
+                    {
+                        echo '<div class="nav_item"><span><a href="home.php">Home</a></span></div>
+                        <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
+                        <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>';
+                    }
+                    else 
+                    {
+                        echo '<div class="nav_item"><span><a href="home.php">Home</a></span></div>
+                        <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>';
+                    }
+                    ?>
+                    
 
                 </div>
             </div>
@@ -298,7 +319,7 @@ $i++;
                             <div class="mt-5 mb-4">
                                 <p
                                     style="font-size:large;color:white;border:1px solid #93dfef;display: inline-block;padding:10px;border-radius: 10px;">
-                                    DATA STRUCTURES AND APPLICATIONS</p>
+                                    DATABASE MANAGEMENT SYSTEMS</p>
                                 <div class="leader_container overflow-auto">
                                     <table class="table table-striped">
                                         <thead>
@@ -314,7 +335,6 @@ $i++;
                                         <?php echo $dis2; ?>
                                         </tbody>
                                     </table>
-
                                 </div>
                             </div>
                         </div>
