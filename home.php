@@ -138,7 +138,7 @@ echo '<!DOCTYPE html>
         <div class="row" style="color: white;background-color: #101426;
         position: sticky;
         top: 0;
-        z-index: 5;">
+        z-index: 5;border-bottom:1px solid #275e69">
             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                 <h3>ONLINE MCQ EXAM PORTAL</h3>
 
