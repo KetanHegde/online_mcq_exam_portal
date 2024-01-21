@@ -287,7 +287,7 @@ a,a:hover
         <div class="row" style="color: white;background-color: #101426;
         position: sticky;
         top: 0;
-        z-index: 5;border-bottom:1px solid #275e69">
+        z-index: 5;">
             <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
                 <h3>ONLINE MCQ EXAM PORTAL</h3>
 
@@ -301,10 +301,10 @@ a,a:hover
 
                 </div>
             </div>
+            <h4 style="font-size: x-large;color:white;font-weight: 400;" class="mt-4 lb">Your Performance</h4>
         </div>
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
-                <h4 style="font-size: x-large;color:white;font-weight: 400;" class="mt-4 lb">Your Performance</h4>
                 <div style="display: flex;flex-direction: column;align-items: center;">
                     <div style="width:60%;">
                         <div class="mt-3">
