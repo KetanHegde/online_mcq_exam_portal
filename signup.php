@@ -165,12 +165,12 @@ session_destroy();
                             <div class="t_tle">SIGN UP</div>
                             <div class="mt-2 mb-3" style="width:90%;">
                                 <input type="text" ng-model="name" class="form-control" name="inpName" id="inpName"
-                                    placeholder="Enter Your Name">
+                                    placeholder="Enter Your Name" autocomplete="off">
                                 <div class="uli_"></div>
                             </div>
                             <div class="mb-3" style="width:90%;">
                                 <input type="text" ng-model="usn" name="inpUSN" class="form-control" id="inpUSN"
-                                    placeholder="Enter Your USN">
+                                    placeholder="Enter Your USN" autocomplete="off">
                                 <div class="uli_"></div>
                             </div>
                             <div class="mb-3" style="width:90%;">

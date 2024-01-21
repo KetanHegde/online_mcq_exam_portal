@@ -153,7 +153,7 @@ while($j<=29)
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <form action="verify/check.php" method="POST" target="_blank" id="f" onsubmit="window.close()">
+                <form action="verify/check.php" method="POST" id="f" onsubmit="window.close()">
                 <input type="text" style="display:none;" name="time" id="timee">
                 <h2 style="font-size: xx-large;font-weight: bold;padding: 10px 3px;border-bottom:2px solid #93dfef;">
                     <?php echo $sname ?></h2>
@@ -168,6 +168,10 @@ while($j<=29)
 </body>
 
 <script>
+    window.history.forward(); 
+        function noBack() { 
+            window.history.forward(); 
+        } 
 document.getElementById('d').style.display = "none";
 
 var quest = document.getElementById('quest');

@@ -23,12 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $o3 = $_POST['inpO3'];
     $o4 = $_POST['inpO4'];
     $ans = $_POST['inpAns'];
-    $sid = 1;
+    $sid = $_SESSION['sid'];
     $sql = "INSERT INTO QUESTIONS(QUESTION,SID) VALUES ('$q','$sid')";
     $conn->query($sql);
     $sql = "INSERT INTO OPTIONS(O1,O2,O3,O4,ANSWER) VALUES ('$o1','$o2','$o3','$o4','$ans')";
     $conn->query($sql);
     header("Location: ../add_question.php");
+
 }
 else
 {

@@ -148,7 +148,7 @@ echo '<!DOCTYPE html>
                     style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
                     <div class="nav_item"><span><a href="leader_board.php">Leaderboard</a></span></div>
                     <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
-                    <div class="nav_item"><span><a href="logout.php" target="_blank" onclick="window.close();">Logout</a></span></div>
+                    <div class="nav_item"><span><a href="logout.php" onclick="window.close();">Logout</a></span></div>
 
                 </div>
             </div>
@@ -166,7 +166,7 @@ echo '<!DOCTYPE html>
                 <div style="display: flex;flex-direction: column;align-items: center;">
                 
                     <div style="width:85%;">
-                    <form action="make_q.php" target="_blank" method="POST" style="width:100%;">
+                    <form action="make_q.php" method="POST" style="width:100%;">
                         <div class="mt-3">
                             <p style="font-size: xx-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;"
                                 class="mt-4">Available
