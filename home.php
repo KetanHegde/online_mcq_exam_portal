@@ -350,6 +350,29 @@ else
             button {
                 border: none;
             }
+
+            div.add_div
+            {
+                display: flex;flex-direction: row;align-items: center;height:30vh;justify-content: space-between;border:1px solid #3c4a76;padding:10px;border-radius: 10px;
+            }
+            
+
+            @media only screen and (max-width: 540px)
+            {
+                div.add_div
+                {
+                    flex-direction: column;
+                    justify-content:center;
+                    height: fit-content;
+                }
+                .add_subject
+                {
+                    width:90%;
+                    padding: 20px;
+                    margin:20px;
+                }
+            }
+
         </style>
     </head>
     
@@ -387,8 +410,7 @@ else
                                 style="font-size: x-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;">
                                 Add Questions</p>
                             <form action="add_question.php" method="POST">
-                            <div
-                                style="display: flex;flex-direction: row;align-items: center;height:30vh;justify-content: space-between;border:1px solid #3c4a76;padding:10px;border-radius: 10px;">
+                            <div class="add_div">
                                 <button class="add_subject" type="submit" name="SUB" value="1"><span><b>COMPUTER
                                             NETWORKS</b></span></button>
                                 <button class="add_subject" type="submit" name="SUB" value="2"><span><b>OPERATING
