@@ -183,7 +183,7 @@ if(isset($_SESSION['usn']))
                         <div class="t_tle">LOG IN</div>
                         <div class="mt-2 mb-3" style="width:90%;">
                             <input type="text" ng-model="usn" class="form-control" name="inpUSN" id="inpUSN"
-                                placeholder="Enter Your USN" autocomplete="off">
+                                placeholder="Enter Your USN / AID" autocomplete="off">
                             <div class="uli_"></div>
                         </div>
                         <div class="mb-3" style="width:90%;">
