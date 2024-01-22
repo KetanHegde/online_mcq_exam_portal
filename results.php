@@ -283,7 +283,7 @@ a,a:hover
     {
         div.top_div
         {
-            width:90%;
+            width:95%;
         }
         .prog_div
         {

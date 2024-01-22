@@ -238,14 +238,6 @@ $i++;
     {
         div.top_div
         {
-            width:90%;
-        }
-    }
-
-    @media only screen and (max-width: 390px)
-    {
-        div.top_div
-        {
             width:97%;
         }
     }

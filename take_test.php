@@ -123,6 +123,24 @@ while($j<=29)
         h1 {
             background-color: #1f274a;
         }
+        @media only screen and (max-width:780px) {
+            div.nodis {
+                display: none;
+            }
+
+            .col-lg-3 {
+                height: fit-content !important;
+                border-right: none !important;
+            }
+            .queBox
+            {
+                margin:5% 5px !important;
+            }
+            .che
+            {
+                height:60vh !important;
+            }
+        }
     </style>
 </head>
 
@@ -131,7 +149,7 @@ while($j<=29)
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12"
                 style="border-right:1px solid #93dfef;height:100vh;display: flex;flex-direction: column;align-items: center;padding:0%;">
-                <div style="width:99%;border:1px solid #3c4a76;border-radius: 5px;padding: 0.8vw 1.7vw;">
+                <div style="width:99%;border:1px solid #3c4a76;border-radius: 5px;padding: 0.8vw 1.7vw;" class="nodis">
                     <div style="font-size: x-large;font-weight: 700;">Candidate Information</div>
                     <div class="info">Name: <?php echo $_SESSION['name']?></div>
                     <div class="info">USN: <?php echo  $_SESSION['usn']?></div>
@@ -140,7 +158,7 @@ while($j<=29)
                     <p style="font-size: 20px;text-align: center;margin-bottom: 0;font-weight: bold;">Time remaining</p>
                     <p style="font-size: 80px;text-align: center;font-weight: 600;margin-bottom: 1vh;margin-top: 0;" id="timer"></p>
                 </div>
-                <div style="width:99%;border-radius: 5px;padding: 5px;border: 1px solid #3c4a76;">
+                <div style="width:99%;border-radius: 5px;padding: 5px;border: 1px solid #3c4a76;" class="nodis">
                     <p style="font-size: large;text-align:center;font-weight: 700;margin-bottom: 0;">Instructions to
                         the candidate</p>
                     <ol>
@@ -157,7 +175,7 @@ while($j<=29)
                 <input type="text" style="display:none;" name="time" id="timee">
                 <h2 style="font-size: xx-large;font-weight: bold;padding: 10px 3px;border-bottom:2px solid #93dfef;">
                     <?php echo $sname ?></h2>
-                <div style="height:88vh;display: flex;flex-direction: column;align-items: center;" class="overflow-auto"
+                <div style="height:88vh;display: flex;flex-direction: column;align-items: center;" class="overflow-auto che"
                     id="quest">
                 </div>
                 </form>

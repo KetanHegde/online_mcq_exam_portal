@@ -182,6 +182,13 @@ else if(!isset($_SESSION['sid']))
         text-decoration:none;
         color:white;
     }
+    @media only screen and (max-width:600px)
+    {
+        div.add-div 
+        {
+            width:90% !important;
+        }
+    }
     </style>
 </head>
 
@@ -207,7 +214,7 @@ else if(!isset($_SESSION['sid']))
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
             <form action="verify/insert_q.php" method="POST">
                 <div style="display:flex;align-items: center;width:100%;flex-direction: column;" class="mt-4 mb-4">
-                    <div style="width:60%;">
+                    <div style="width:60%;" class="add-div">
                         <p
                             style="font-size: x-large;color:white;border:1px solid #93dfef;display: inline-block;padding:2px 20px;border-radius: 10px;">
                             Add A Question</p>

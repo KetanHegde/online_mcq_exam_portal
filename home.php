@@ -173,7 +173,7 @@ div.res-nav
         }
     
         .take_test_button {
-            height: 30vh;
+            height: 20vh;
             width: 90%;
         }
     

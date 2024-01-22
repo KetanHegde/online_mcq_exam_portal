@@ -111,7 +111,7 @@ INSERT INTO OPTIONS (O1,O2,O3,O4,ANSWER) VALUES
 ("1990", "1992", "1985", "1994", "1985"),
 (".xls", ".ppt", ".bmp", ".txt", ".txt"),
 ("kernal", "shell", "command", "prompt", "shell"),
-("File allocation table", "Font attribute table", "Format allocation table", "Fileattribute table", "File allocation table"),
+("File allocation table", "Font attribute table", "Format allocation table", "File attribute table", "File allocation table"),
 ("Compiler", "Interpreter", "Application software", "Operating system", "Operating system"),
 ("Install the program", "To scan", "To turn off", "Restarting computer", "Restarting computer"),
 ("The deadlock occurs", "The page is not present in memory", "The buffering occurs","The page is present in memory","The page is not present in memory"),
