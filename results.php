@@ -275,6 +275,41 @@ a,a:hover
         color:white;
     }
 
+    div.top_div
+    {
+        width:70%;
+    }
+    @media only screen and (max-width: 760px)
+    {
+        div.top_div
+        {
+            width:90%;
+        }
+        .prog_div
+        {
+            width:100% !important;
+            border: 1px solid #3c4a76;
+            border-radius: 10px;
+            padding-top:20px !important;
+            margin: 10px 0 10px 0;
+        }
+        div.prog_div_container
+        {
+            display:flex;
+            flex-direction:column !important;
+        }
+    }
+
+    @media only screen and (max-width: 390px)
+    {
+        div.top_div
+        {
+            width:97%;
+        }
+    }
+
+
+
 
 
 
@@ -306,7 +341,7 @@ a,a:hover
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
                 <div style="display: flex;flex-direction: column;align-items: center;">
-                    <div style="width:60%;">
+                    <div class="top_div">
                         <div class="mt-3">
 
                             <div class="mt-4">
@@ -332,7 +367,7 @@ a,a:hover
                                 <p
                                     style="font-size:large;color:white;border:1px solid #93dfef;display: inline-block;padding:10px;border-radius: 10px;">
                                     Result Analysis</p>
-                                <div style="display:flex;flex-direction: row;height: 40vh;">
+                                <div style="display:flex;flex-direction: row;height: 40vh;" class="prog_div_container">
                                     <div class="prog_div">
                                         <div class="progress-bar-1">
                                             <progress min="0" max="100"

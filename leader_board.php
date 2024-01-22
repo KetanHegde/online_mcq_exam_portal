@@ -230,6 +230,25 @@ $i++;
         text-decoration:none;
         color:white;
     }
+    div.top_div
+    {
+        width:70%;
+    }
+    @media only screen and (max-width: 720px)
+    {
+        div.top_div
+        {
+            width:90%;
+        }
+    }
+
+    @media only screen and (max-width: 390px)
+    {
+        div.top_div
+        {
+            width:97%;
+        }
+    }
     </style>
 </head>
 
@@ -269,7 +288,7 @@ $i++;
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0;">
                 
                 <div style="display: flex;flex-direction: column;align-items: center;">
-                    <div style="width:70%;">
+                    <div class="top_div">
                         <div class="mt-3">
                             <div class="mt-4">
                                 <p

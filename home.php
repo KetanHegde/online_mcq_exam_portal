@@ -55,6 +55,11 @@ echo '<!DOCTYPE html>
 </head>
 
 <style>
+
+div.res-nav
+{
+    display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;
+}
     ::-webkit-scrollbar {
         display: none;
     }
@@ -131,6 +136,48 @@ echo '<!DOCTYPE html>
         justify-content: center;
         cursor: pointer;
     }
+    @media only screen and (max-width: 760px) {
+        .take_test_button {
+            width: 45%;
+            height: 40vh;
+        }
+    
+        .info-div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+        }
+    }
+    
+    @media only screen and (max-width: 630px) {
+        .take_test_button {
+            height: 40vh;
+        }
+    }
+
+    @media only screen and (max-width:580px)
+    {
+        div.res-nav
+        {
+            flex-direction: row;
+        }
+    }
+    
+    
+    @media only screen and (max-width: 470px) {
+        .take_test_container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .take_test_button {
+            height: 30vh;
+            width: 90%;
+        }
+    
+    }
 </style>
 
 <body style="background-color:#101426;font-family: \'DM Sans\',sans-serif;">
@@ -139,13 +186,12 @@ echo '<!DOCTYPE html>
         position: sticky;
         top: 0;
         z-index: 5;border-bottom:1px solid #275e69">
-            <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                 <h3>ONLINE MCQ EXAM PORTAL</h3>
 
             </div>
-            <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
-                <div
-                    style="display:flex;flex-direction: row;align-items: center;justify-content: space-around;height: 70px;">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="res-nav">
                     <div class="nav_item"><span><a href="leader_board.php">Leaderboard</a></span></div>
                     <div class="nav_item"><span><a href="results.php">Your Performance</a></span></div>
                     <div class="nav_item"><span><a href="logout.php">Logout</a></span></div>
@@ -180,7 +226,7 @@ echo '<!DOCTYPE html>
                                 <div class="take_test_info">
                                     <p class="dis_topic">COMPUTER NETWORKS</p>
                                     <p>Attempts Remaining: '.(3-$at1).' / 3</p>
-                                    <div>
+                                    <div class="info-div">
                                         <span class="nt_span">No
                                             of
                                             questions :
@@ -198,7 +244,7 @@ echo '<!DOCTYPE html>
                                 <div class="take_test_info">
                                     <p class="dis_topic">OPERATING SYSTEMS</p>
                                     <p>Attempts Remaining: '.(3-$at2).' / 3</p>
-                                    <div>
+                                    <div class="info-div">
                                         <span class="nt_span">No
                                             of
                                             questions :
@@ -214,9 +260,9 @@ echo '<!DOCTYPE html>
                                 echo '><span>Attempt Test Now</span>
                                 </button>
                                 <div class="take_test_info">
-                                    <p class="dis_topic">DATABASE MANAGEMENT SYSTEMS</p>
+                                    <p class="dis_topic">Database Management Systems</p>
                                     <p>Attempts Remaining: '.(3-$at3).' / 3</p>
-                                    <div>
+                                    <div class="info-div">
                                         <span class="nt_span">No
                                             of
                                             questions :
