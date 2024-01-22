@@ -153,7 +153,7 @@ while($j<=29)
                 </div>
             </div>
             <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
-                <form action="verify/check.php" method="POST" id="f" onsubmit="window.close()">
+                <form action="verify/check.php" method="POST" id="f">
                 <input type="text" style="display:none;" name="time" id="timee">
                 <h2 style="font-size: xx-large;font-weight: bold;padding: 10px 3px;border-bottom:2px solid #93dfef;">
                     <?php echo $sname ?></h2>
@@ -218,12 +218,6 @@ function handleFullscreenChange() {
     }
 }
 
-
-
-
-
-
-
 var countdownTime = 60; 
 
   function updateTimer() {
@@ -238,11 +232,8 @@ var countdownTime = 60;
       setTimeout(updateTimer, 1000);
     } else {
       document.getElementById('f').submit();
-      window.close();
     }
   }
-
-
 </script>
 
 </html>

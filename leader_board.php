@@ -105,8 +105,6 @@ $i++;
 }
 }
 
-
-
 $sql = "WITH RankedScores AS (
     SELECT
         NAME,

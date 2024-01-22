@@ -6,8 +6,6 @@ session_start();
 include "../db_conn.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST"){
-$sql = "USE MCQ";
-$conn->query($sql);
 $usn = $_POST['inpUSN'];
 $check = "SELECT * FROM USERS WHERE USN = '$usn'";
 $result = $conn->query($check);
