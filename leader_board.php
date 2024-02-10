@@ -7,153 +7,57 @@ if(!isset($_SESSION['usn']))
     $_SESSION['login_note'] = "Please Login to continue";
     header("Location: index.php");
 }
-
 $usn = $_SESSION['usn'];
-$sql = "WITH RankedScores AS (
-    SELECT
-        NAME,
-        SCORE.USN,
-        TIME_TAKEN,
-        SCORE,
-        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
-    FROM SCORE
-    JOIN USERS ON SCORE.USN = USERS.USN
-    WHERE SID = 1
-)
-SELECT NAME, USN, TIME_TAKEN, SCORE
-FROM RankedScores
-WHERE RowNum = 1
-ORDER BY SCORE DESC, TIME_TAKEN ASC";
 
+function display_rank($sid,$conn)
+{
 $dis='';
-$res = $conn->query($sql);
-if($res->num_rows<=0)
-{
-    $dis = "<tr><td colspan='5'>No data</td></tr>";
+$sql = "CALL STUDENT_RANK('$sid')";
+if ($conn -> multi_query($sql)) {
+    do {
+      if ($result = $conn -> store_result()) {
+        $i=1;
+        if($result -> num_rows>0){
+        while ($row = $result -> fetch_row()) {
+            if(strlen($row[2])==1)
+            {
+                $row[2]='0'.$row[2];
+            }
+            if($row[2]=='60')
+            {
+                $tm = '01';
+                $ts = '00';
+            }
+            else
+            {
+                $tm = '00';
+                $ts = $row[2];
+            }
+            $dis = $dis.'<tr>
+            <td>'.$i.'</td>
+            <td>'.$row[0].'</td>
+            <td>'.$row[1].'</td>
+            <td>'.$tm.':'.$ts.'</td>
+            <td>'.$row[3].'/5</td>
+            </tr>';
+        $i++;
+    }
+    $result -> free_result();
 }
 else
-{
-$i=1;
-while($row=$res->fetch_assoc())
-{
-    if(strlen($row['TIME_TAKEN'])==1)
     {
-            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
+        $dis = "<tr><td colspan='5'>No data</td></tr>";
     }
-    if($row['TIME_TAKEN']=='60')
-    {
-        $tm = '01';
-        $ts = '00';
+
     }
-    else
-    {
-        $tm = '00';
-        $ts = $row['TIME_TAKEN'];
-    }
-    $dis = $dis.'<tr>
-    <td>'.$i.'</td>
-    <td>'.$row['NAME'].'</td>
-    <td>'.$row['USN'].'</td>
-    <td>'.$tm.':'.$ts.'</td>
-    <td>'.$row['SCORE'].'/5</td>
-</tr>';
-$i++;
+    } while ($conn -> next_result());
 }
+return $dis;
 }
 
-
-
-$sql = "WITH RankedScores AS (
-    SELECT
-        NAME,
-        SCORE.USN,
-        TIME_TAKEN,
-        SCORE,
-        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
-    FROM SCORE
-    JOIN USERS ON SCORE.USN = USERS.USN
-    WHERE SID = 2
-)
-SELECT NAME, USN, TIME_TAKEN, SCORE
-FROM RankedScores
-WHERE RowNum = 1
-ORDER BY SCORE DESC, TIME_TAKEN ASC";
-
-$dis1='';
-$res = $conn->query($sql);
-if($res->num_rows<=0)
-{
-    $dis1 = "<tr><td colspan='5'>No data</td></tr>";
-}
-else
-{
-$i=1;
-while($row=$res->fetch_assoc())
-{
-    if(strlen($row['TIME_TAKEN'])==1)
-    {
-            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
-    }
-    $dis1 = $dis1.'<tr>
-    <td>'.$i.'</td>
-    <td>'.$row['NAME'].'</td>
-    <td>'.$row['USN'].'</td>
-    <td>00:'.$row['TIME_TAKEN'].'</td>
-    <td>'.$row['SCORE'].'/5</td>
-</tr>';
-$i++;
-}
-}
-
-$sql = "WITH RankedScores AS (
-    SELECT
-        NAME,
-        SCORE.USN,
-        TIME_TAKEN,
-        SCORE,
-        ROW_NUMBER() OVER (PARTITION BY NAME ORDER BY SCORE DESC, TIME_TAKEN ASC) AS RowNum
-    FROM SCORE
-    JOIN USERS ON SCORE.USN = USERS.USN
-    WHERE SID = 3
-)
-SELECT NAME, USN, TIME_TAKEN, SCORE
-FROM RankedScores
-WHERE RowNum = 1
-ORDER BY SCORE DESC, TIME_TAKEN ASC";
-
-$dis2='';
-$res = $conn->query($sql);
-if($res->num_rows<=0)
-{
-    $dis2 = "<tr><td colspan='5'>No data</td></tr>";
-}
-else
-{
-$i=1;
-while($row=$res->fetch_assoc())
-{
-    if(strlen($row['TIME_TAKEN'])==1)
-    {
-            $row['TIME_TAKEN']='0'.$row['TIME_TAKEN'];
-    }
-    $dis2 = $dis2.'<tr>
-    <td>'.$i.'</td>
-    <td>'.$row['NAME'].'</td>
-    <td>'.$row['USN'].'</td>
-    <td>00:'.$row['TIME_TAKEN'].'</td>
-    <td>'.$row['SCORE'].'/5</td>
-</tr>';
-$i++;
-}
-}
-
-
-
-
-
-
-
-
+$dis = display_rank(1,$conn);
+$dis1 = display_rank(2,$conn);
+$dis2 = display_rank(3,$conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
