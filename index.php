@@ -217,9 +217,6 @@ if(isset($_SESSION['usn']))
 
 
             </div>
-
-
-
         </div>
     </div>
 </body>
