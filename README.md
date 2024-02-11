@@ -1,2 +1,2 @@
 # Online MCQ Exam Portal
-> Developed for the purpose of DBMS Mini Project
+> **Developed for the purpose of DBMS Mini Project**
