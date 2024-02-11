@@ -222,8 +222,6 @@ if(isset($_SESSION['usn']))
 
         </div>
     </div>
-    </div>
-
 </body>
 <script>
     angular.module('loginApp',[]).controller('loginCtrl',function($scope)
