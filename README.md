@@ -6,7 +6,6 @@ You can visit our site by clicking [here](https://mcqdbproject.000webhostapp.com
 
 
 >[!NOTE]
->Important Points for Users
   > - Users have to sign up and log in
   > - Users can attempt the test
   > - There are limited number of attempts for each user for each subject
@@ -14,7 +13,6 @@ You can visit our site by clicking [here](https://mcqdbproject.000webhostapp.com
   > - Users can view the leaderboard
 
 >[!NOTE]
->Important Points for Admin
   > - Admin can log in
   > - Admin can view the leaderboard
   > - Admin can **Add Questions**
