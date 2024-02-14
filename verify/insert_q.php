@@ -24,8 +24,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $o4 = $_POST['inpO4'];
     $ans = $_POST['inpAns'];
     $sid = $_SESSION['sid'];
-    $sql = "INSERT INTO QUESTIONS(QUESTION,SID) VALUES ('$q','$sid')";
-    $conn->query($sql);
+
+
+    try {
+        $sql = "INSERT INTO QUESTIONS(QUESTION,SID) VALUES ('$q','$sid')";
+        $conn->query($sql);
+        if ($conn->error) {
+            throw new Exception($conn->error);
+        }
+    } catch (Exception $e) {
+        echo '<script>
+        alert("' . $e->getMessage() . '");
+        window.location.href = "../home.php";
+      </script>';
+    }
     $sql = "INSERT INTO OPTIONS(O1,O2,O3,O4,ANSWER) VALUES ('$o1','$o2','$o3','$o4','$ans')";
     $conn->query($sql);
     header("Location: ../add_question.php");
